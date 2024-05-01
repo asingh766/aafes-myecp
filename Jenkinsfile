@@ -31,7 +31,7 @@ pipeline {
         }
       steps{
         script {
-          withCredentials([file(credentialsId: "${CREDENTIALS_ID}",variable: 'GC_KEY')]){
+          withCredentials([file(credentialsId: 'key-sa',variable: 'GC_KEY')]){
             echo "${GC_KEY}"
             sh "cat ${GC_KEY}"
             sh "gcloud auth activate-service-account --key-file=${GC_KEY}"
