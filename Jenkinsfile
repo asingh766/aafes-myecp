@@ -35,7 +35,7 @@ pipeline {
             echo "${GC_KEY}"
             sh "cat ${GC_KEY}"
             sh "gcloud auth activate-service-account --key-file=${GC_KEY}"
-            sh "cat "${$GC_KEY}" | docker login -u _json_key_base64 --password-stdin https://us-central1-docker.pkg.dev/aafes-myecp/jenkins"
+            sh "cat ${$GC_KEY} | docker login -u _json_key_base64 --password-stdin https://us-central1-docker.pkg.dev/aafes-myecp/jenkins"
             sh "docker push ${IMAGE_NAME}:latest"
             sh "docker logout https://${REPO_LOCATION}-docker.pkg.dev"
          }
