@@ -9,7 +9,7 @@ ARG APP=/app/
 ARG BASE_URL=$BASE_URL
 RUN git clone https://github.com/flutter/flutter.git $FLUTTER_SDK
 RUN cd $FLUTTER_SDK && git fetch && git checkout $FLUTTER_VERSION
-
+RUN git clone https://github.com/docker-android-sdk/android-30.git
 ENV PATH="$FLUTTER_SDK/bin:$FLUTTER_SDK/bin/cache/dart-sdk/bin:${PATH}"
 ENV BASE_URL=$BASE_URL
 RUN echo $BASE_URL
