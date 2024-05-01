@@ -13,11 +13,11 @@ pipeline {
     stage('Docker Build') {
       agent any
       environment{
-        REPO_LOCATION= "us-central1"
-        PROJECT = "AAFES-MyECP"
+        REPO_LOCATION= "uscentral1"
+        PROJECT = "AAFESMyECP"
         REPO_NAME = "jenkins"
-        APP_NAME ="flutterflow-webapp"
-        IMAGE_NAME = "${REPO_LOCATION}-docker.pkg.dev/${PROJECT}/${REPO_NAME}/${APP_NAME}"
+        APP_NAME ="flutterflowwebapp"
+        IMAGE_NAME = "${REPO_LOCATION}docker${PROJECT}${REPO_NAME}${APP_NAME}"
        
       }
       steps {
