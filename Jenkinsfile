@@ -31,7 +31,7 @@ pipeline {
         }
       steps{
         script {
-          withCredentials([file(credentialsId: "gcr:${CREDENTIALS_ID}",variable: 'GC_KEY')]){
+          withCredentials([file(credentialsId: "${CREDENTIALS_ID}",variable: 'GC_KEY')]){
             sh 'gcloud auth activate-service-account --key-file=${GC_KEY}'
             sh 'cat "${$GC_KEY}" | docker login -u _json_key_base64 --password-stdin https://us-central1-docker.pkg.dev/aafes-myecp/jenkins'
             sh 'docker push ${IMAGE_NAME}:latest'
