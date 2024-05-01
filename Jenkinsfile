@@ -13,7 +13,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'sudo docker build -t flutterv3 .'
+        sh 'docker build -t flutterv3 .'
       }
     }
     stage('Push image') {
