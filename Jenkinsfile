@@ -27,7 +27,7 @@ pipeline {
     stage('Push image') {
       agent any
       environment {
-        CREDENTIALS_ID =credentials('78cf387e-1352-4989-bff9-d9eff2b46777')
+        CREDENTIALS_ID =credentials('f4ba622f-6d65-4624-80fb-66e01689da52')
         }
       steps{
         script {
