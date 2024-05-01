@@ -27,7 +27,7 @@ pipeline {
     stage('Push image') {
       agent any
       environment {
-        CREDENTIALS_ID =credentials('sa-key')
+        CREDENTIALS_ID =credentials('sa-key.json')
         }
       steps{
         script {
