@@ -13,8 +13,8 @@ pipeline {
     stage('Docker Build') {
       agent any
       environment{
-        REPO_LOCATION= "uscentral1"
-        PROJECT = "aafesmyecp"
+        REPO_LOCATION= "us-central1"
+        PROJECT = "aafes-myecp"
         REPO_NAME = "jenkins"
         APP_NAME ="flutterflowwebapp"
         IMAGE_NAME = "${REPO_LOCATION}docker/${PROJECT}/${REPO_NAME}/${APP_NAME}/${BUILD_NUMBER}"
@@ -27,18 +27,22 @@ pipeline {
     stage('Push image') {
       agent any
       environment {
-        CREDENTIALS_ID =credentials('key-sa')
+        CREDENTIALS_ID = credentials('gcp-sa-key')
         }
       steps{
         script {
-          withCredentials([file(credentialsId: 'key-sa',variable: 'GC_KEY')]){
-            echo "${GC_KEY}"
-            sh "cat ${GC_KEY}"
-            sh "gcloud auth activate-service-account --key-file=${GC_KEY}"
-            sh "cat ${$GC_KEY} | docker login -u _json_key_base64 --password-stdin https://us-central1-docker.pkg.dev/aafes-myecp/jenkins"
-            sh "docker push ${IMAGE_NAME}:latest"
-            sh "docker logout https://${REPO_LOCATION}-docker.pkg.dev"
-         }
+          sh 'gcloud auth activate-service-account --key-file=$CREDENTIALS_ID'
+          withEnv(['GCLOUD_PATH=/var/lib/jenkins/workspace/google-cloud-sdk/bin']) {
+            sh 'cat $CREDENTIALS_ID | docker login -u _json_key_base64 --password-stdin https://us-central1-docker.pkg.dev/aafes-myecp/jenkins'
+            sh 'docker push $IMAGE_NAME:latest'
+          }
+          
+        //   withCredentials([file(credentialsId: '"${CREDENTIALS_ID}"',variable: 'GC_KEY')]){
+        //     sh 'gcloud auth activate-service-account --key-file=${GC_KEY}'
+        //     sh 'cat ${$GC_KEY} | docker login -u _json_key_base64 --password-stdin https://us-central1-docker.pkg.dev/aafes-myecp/jenkins'
+        //     sh 'docker push ${IMAGE_NAME}:latest'
+        //     sh 'docker logout https://${REPO_LOCATION}-docker.pkg.dev'
+        //  }
         }
       }
     }
