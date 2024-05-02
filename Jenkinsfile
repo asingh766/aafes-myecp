@@ -17,7 +17,7 @@ pipeline {
         PROJECT = "aafesmyecp"
         REPO_NAME = "jenkins"
         APP_NAME ="flutterflowwebapp"
-        IMAGE_NAME = "${REPO_LOCATION}docker/${PROJECT}/${REPO_NAME}/${APP_NAME}/${BUILD_NUMBER}"
+        IMAGE_NAME = "${REPO_LOCATION}docker.pkg.dev/${PROJECT}/${REPO_NAME}/${APP_NAME}/${BUILD_NUMBER}"
        
       }
       steps {
@@ -34,7 +34,7 @@ pipeline {
           sh 'gcloud auth activate-service-account --key-file=$CREDENTIALS_ID'
           withEnv(['GCLOUD_PATH=/var/lib/jenkins/workspace/google-cloud-sdk/bin']) {
             sh 'cat $CREDENTIALS_ID | docker login -u _json_key --password-stdin https://us-central1-docker.pkg.dev/aafes-myecp/jenkins'
-            sh 'docker push $IMAGE_NAME'
+            sh 'docker push $IMAGE_NAME:latest'
           }
           
         //   withCredentials([file(credentialsId: '"${CREDENTIALS_ID}"',variable: 'GC_KEY')]){
