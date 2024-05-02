@@ -17,7 +17,7 @@ pipeline {
         PROJECT = "aafes-myecp"
         REPO_NAME = "jenkins"
         APP_NAME ="flutterflowwebapp"
-        IMAGE_NAME = "${REPO_LOCATION}docker/${PROJECT}/${REPO_NAME}/${APP_NAME}/${BUILD_NUMBER}"
+        IMAGE_NAME = "${REPO_LOCATION}-docker.pkg.dev/${PROJECT}/${REPO_NAME}/${APP_NAME}/${BUILD_NUMBER}"
        
       }
       steps {
