@@ -34,6 +34,7 @@ pipeline {
           sh 'gcloud auth activate-service-account --key-file=$CREDENTIALS_ID'
           withEnv(['GCLOUD_PATH=/var/lib/jenkins/workspace/google-cloud-sdk/bin']) {
             sh 'cat $CREDENTIALS_ID | docker login -u _json_key_base64 --password-stdin https://us-central1-docker.pkg.dev/aafes-myecp/jenkins'
+            echo "Image Name: ${IMAGE_NAME}"
             sh 'docker push $IMAGE_NAME:latest'
           }
           
