@@ -17,7 +17,7 @@ pipeline {
         PROJECT = "aafesmyecp"
         REPO_NAME = "jenkins"
         APP_NAME ="flutterflowwebapp"
-        IMAGE_NAME = "${REPO_LOCATION}docker.pkg.dev/${PROJECT}/${REPO_NAME}/${APP_NAME}/${BUILD_NUMBER}"
+        IMAGE_NAME = "${REPO_LOCATION}-docker.pkg.dev/${PROJECT}/${REPO_NAME}/${APP_NAME}/${BUILD_NUMBER}"
        
       }
       steps {
@@ -28,6 +28,11 @@ pipeline {
       agent any
       environment {
         CREDENTIALS_ID = credentials('gcp-sa-key')
+        REPO_LOCATION= "uscentral-1"
+        PROJECT = "aafesmyecp"
+        REPO_NAME = "jenkins"
+        APP_NAME ="flutterflowwebapp"
+        IMAGE_NAME = "${REPO_LOCATION}-docker.pkg.dev/${PROJECT}/${REPO_NAME}/${APP_NAME}/${BUILD_NUMBER}"
         }
       steps{
         script {
