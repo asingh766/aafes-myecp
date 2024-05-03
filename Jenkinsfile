@@ -9,17 +9,16 @@ pipeline {
 //     APP_NAME ="flutterflow-webapp"
 //     IMAGE_NAME = "${REPO_LOCATION}-docker.pkg.dev/${PROJECT}/${REPO_NAME}/${APP_NAME}"
 //     }
-  stages {
-    stage('Docker Build') {
-      agent any
-      environment{
+  environment{
         REPO_LOCATION= "us-central1"
         PROJECT = "aafes-myecp"
         REPO_NAME = "jenkins"
         APP_NAME ="flutterflowwebapp"
         IMAGE_NAME = "${REPO_LOCATION}-docker.pkg.dev/${PROJECT}/${REPO_NAME}/${APP_NAME}/${BUILD_NUMBER}"
-       
       }
+  stages {
+    stage('Docker Build') {
+      agent any
       steps {
         sh "docker build -t ${IMAGE_NAME} ."
       }
