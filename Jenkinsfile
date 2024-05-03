@@ -21,7 +21,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh "docker build -t ${IMAGE_NAME} ."
+        sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
       }
     }
     stage('Push image') {
